@@ -339,7 +339,7 @@
       return `
       <section class="gallery">
         ${title(b.title)}
-        <div class="gallery__grid ${b.feature ? "gallery__grid--feature" : ""}">${(b.images || []).map((m) => media(m, { lightbox: group })).join("")}</div>
+        <div class="gallery__grid">${(b.images || []).map((m) => media(m, { lightbox: group })).join("")}</div>
       </section>`;
     },
 
