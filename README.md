@@ -169,7 +169,7 @@ Inside a `"..."` string, write `\"` for a double quote, or just use curly quotes
 
 // Text beside an image (flip: true puts the image on the left)
 { type: "split", eyebrow: "small label", title: "Big heading", body: "Paragraphs...",
-  image: "/images/about/team-at-gdc.jpg", imageSize: "small",   // imageSize optional
+  image: "/images/about/team-at-gdc.jpg", imageSize: "small",   // optional: "small" or "medium"
   buttons: [ ... ] }
 
 // Big row of names separated by ✢ (url optional per item)
