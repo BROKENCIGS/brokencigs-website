@@ -152,7 +152,7 @@
 
     // A row of names separated by ✢, e.g. events we've shown at
     chips: (b) => `
-      <section class="chips">
+      <section class="chips" ${b.hover ? `style="--chip-hover:${esc(b.hover)}"` : ""}>
         ${b.title ? `<p class="eyebrow chips__title">${inline(b.title)}</p>` : ""}
         <ul>${(b.items || []).map((i) => {
           const it = typeof i === "string" ? { label: i } : i;
