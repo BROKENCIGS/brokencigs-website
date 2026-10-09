@@ -21,7 +21,14 @@
 // ── INKRESSION ────────────────────────────────────────────────
 PAGE = {
   section: "/games/",
-  accent:  "#ff6fae",
+  accent:    "#ffffff",        // white buttons & highlights, like the original
+  accentInk: "#000000",
+  background: {
+    image:    "/images/inkression/page-background.gif",
+    size:     "100% auto",       // stretch to the full page width
+    position: "top left",
+    height:   "54.2vw",          // = image height at full width (400 / 739)
+  },
   blocks: [
     {
       type:       "game-hero",

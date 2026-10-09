@@ -21,7 +21,14 @@
 // ── THE HILLTOP FUNERAL ───────────────────────────────────────
 PAGE = {
   section: "/games/",          // highlights "Games" in the menu
-  accent:  "#dcc918",          // this game's highlight colour
+  accent:    "#dbc816",        // this game's highlight & button colour
+  accentInk: "#1c1c1c",        // text colour on buttons
+  background: {                // art behind the top of the page
+    image:    "/images/the-hilltop-funeral/page-background.png",
+    size:     "auto",          // "auto" = actual size, "cover" = fill, "100% auto" = full width
+    position: "top center",
+    height:   "1240px",
+  },
   blocks: [
     {
       type:       "game-hero",

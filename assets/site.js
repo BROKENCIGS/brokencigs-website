@@ -296,7 +296,22 @@
     </footer>`;
 
   document.body.id = "top";
-  if (PAGE.accent) document.documentElement.style.setProperty("--accent", PAGE.accent);
+  const rootStyle = document.documentElement.style;
+  if (PAGE.accent)    rootStyle.setProperty("--accent", PAGE.accent);
+  if (PAGE.accentInk) rootStyle.setProperty("--accent-ink", PAGE.accentInk);
+
+  // Optional page background art at the top, fading into the page colour
+  if (PAGE.background && PAGE.background.image) {
+    const bg = PAGE.background;
+    const el = document.createElement("div");
+    el.className = "page-bg";
+    el.setAttribute("aria-hidden", "true");
+    el.style.backgroundImage = `url("${bg.image}")`;
+    el.style.backgroundSize = bg.size || "cover";
+    el.style.backgroundPosition = bg.position || "top center";
+    el.style.height = bg.height || "100vh";
+    document.body.prepend(el);
+  }
   if (PAGE.theme) document.body.classList.add("theme-" + PAGE.theme);
 
   const main = document.createElement("main");

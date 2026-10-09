@@ -14,6 +14,7 @@
   --muted:     #9b9b9b;   /* secondary text */
   --accent:    #e9e9e9;   /* buttons & highlights — pages can override with PAGE.accent */
   --accent-ink:#0b0b0b;   /* text on top of accent buttons */
+  --btn-hover-bg: rgba(43, 43, 43, .8);   /* buttons invert on hover: dark fill, accent text */
 
   --font-display: "Outfit", system-ui, sans-serif;
   --font-body:    "Inter", system-ui, sans-serif;
@@ -114,6 +115,15 @@ body.scrolled .site-header, body.menu-open .site-header {
 }
 
 /* ── Layout ───────────────────────────────────────────────── */
+/* Page background art (PAGE.background) — sits behind everything, fades out at the bottom */
+.page-bg {
+  position: absolute; top: 0; left: 0; right: 0; z-index: -1;
+  background-repeat: no-repeat;
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+  pointer-events: none;
+}
+
 .site-main {
   padding: calc(var(--header-h) + 40px) var(--gutter) 40px;
   max-width: calc(var(--max) + var(--gutter) * 2);
@@ -170,7 +180,7 @@ body.scrolled .site-header, body.menu-open .site-header {
   border: 1px solid var(--accent); border-radius: 999px;
   transition: transform .2s, background .2s, color .2s;
 }
-.btn:hover { transform: translateY(-2px); }
+.btn:hover { transform: translateY(-2px); background: var(--btn-hover-bg); color: var(--accent); }
 .btn--ghost { background: transparent; color: var(--text); border-color: var(--line); }
 .btn--ghost:hover { border-color: var(--text); }
 
