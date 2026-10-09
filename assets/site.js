@@ -381,18 +381,31 @@
       const group = "e" + Math.random().toString(36).slice(2, 7);
       return `
       <article class="event">
-        <header class="event__head">
-          <p class="eyebrow">${esc([b.date, b.location].filter(Boolean).join("  ·  "))}</p>
-          <h2 class="event__title">${inline(b.title)}</h2>
-        </header>
-        <div class="event__main ${lead || b.youtube ? "" : "event__main--solo"}">
-          <div class="prose">${paras(b.body)}</div>
-          ${b.youtube ? `<div class="video__frame"><iframe src="https://www.youtube-nocookie.com/embed/${esc(b.youtube)}${b.start ? `?start=${+b.start}` : ""}" title="${esc(b.title)}" loading="lazy" allowfullscreen></iframe></div>` : lead}
+        <div class="event__when">
+          ${b.date ? `<p class="event__date">${esc(b.date)}</p>` : ""}
+          ${b.location ? `<p class="event__where">${esc(b.location)}</p>` : ""}
         </div>
-        ${b.photos && b.photos.length
-          ? `<div class="event__photos cols-${Math.min(b.photos.length, 3)}">${b.photos.map((p) => media(p, { lightbox: group })).join("")}</div>` : ""}
+        <div class="event__body">
+          <h2 class="event__title">${inline(b.title)}</h2>
+          <div class="event__main ${lead || b.youtube ? "" : "event__main--solo"}">
+            <div class="prose">${paras(b.body)}</div>
+            ${b.youtube ? `<div class="video__frame"><iframe src="https://www.youtube-nocookie.com/embed/${esc(b.youtube)}${b.start ? `?start=${+b.start}` : ""}" title="${esc(b.title)}" loading="lazy" allowfullscreen></iframe></div>` : lead}
+          </div>
+          ${b.photos && b.photos.length
+            ? `<div class="event__photos cols-${Math.min(b.photos.length, 3)}">${b.photos.map((p) => media(p, { lightbox: group })).join("")}</div>` : ""}
+        </div>
       </article>`;
     },
+
+    // Buttons for every event year in site-config.js; the current page is highlighted
+    "year-nav": (b) => `
+      <nav class="year-nav" aria-label="Event years">
+        ${b.label ? `<span class="year-nav__label">${inline(b.label)}</span>` : ""}
+        ${(SITE.events || []).map((e) => {
+          const url = `/${e.id}/`;
+          return `<a href="${url}" ${here === url ? 'aria-current="page"' : ""}>${esc(e.title)}</a>`;
+        }).join("")}
+      </nav>`,
 
     // Card grid of games or event years (from site-config.js)
     // { type: "cards", source: "games" | "events", exclude: "<id>" }
