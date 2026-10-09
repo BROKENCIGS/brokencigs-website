@@ -101,6 +101,7 @@
       const logo = `<img src="${esc(b.logo)}" alt="${esc(b.title || "")}">`;
       return `
       <section class="game-hero">
+        ${b.badge ? `<p class="promo__badge"><span class="promo__dot"></span>${inline(b.badge)}</p>` : ""}
         ${b.link ? `<a class="game-hero__title-logo" ${linkAttrs(b.link)}>${logo}</a>`
                  : `<div class="game-hero__title-logo">${logo}</div>`}
         ${b.subtitle ? `<p class="game-hero__sub">${inline(b.subtitle)}</p>` : ""}
@@ -223,6 +224,27 @@
       }).join("")}</section>`;
     },
 
+    // Numbered feature rows, alternating sides. Each item: { title, text, media: [1 or 2 images/GIFs] }.
+    // With two media the second overlaps the first like a collage.
+    features: (b) => {
+      const pad = (n) => String(n).padStart(2, "0");
+      return `
+      <section class="features">
+        ${title(b.title)}
+        ${(b.items || []).map((f, i) => `
+          <article class="feat ${i % 2 ? "feat--flip" : ""}">
+            <div class="feat__media ${(f.media || []).length > 1 ? "feat__media--duo" : ""}">
+              ${(f.media || []).slice(0, 2).map((m) => media(m)).join("")}
+            </div>
+            <div class="feat__text">
+              <p class="feat__num">${pad(i + 1)}</p>
+              ${f.title ? `<h3 class="feat__title">${inline(f.title)}</h3>` : ""}
+              <p>${inline(f.text)}</p>
+            </div>
+          </article>`).join("")}
+      </section>`;
+    },
+
     // Big centered image with optional heading above and buttons below
     hero: (b) => `
       <section class="hero">
@@ -291,7 +313,7 @@
       <section class="list">
         ${title(b.title)}
         ${b.intro ? `<div class="prose">${paras(b.intro)}</div>` : ""}
-        <ul class="bullets">${(b.items || []).map((i) => `<li>${inline(i)}</li>`).join("")}</ul>
+        <ul class="bullets ${b.layout === "grid" ? "bullets--grid" : ""}">${(b.items || []).map((i) => `<li>${inline(i)}</li>`).join("")}</ul>
         ${b.outro ? `<div class="prose">${paras(b.outro)}</div>` : ""}
       </section>`,
 
@@ -316,7 +338,7 @@
       return `
       <section class="gallery">
         ${title(b.title)}
-        <div class="gallery__grid">${(b.images || []).map((m) => media(m, { lightbox: group })).join("")}</div>
+        <div class="gallery__grid ${b.feature ? "gallery__grid--feature" : ""}">${(b.images || []).map((m) => media(m, { lightbox: group })).join("")}</div>
       </section>`;
     },
 
