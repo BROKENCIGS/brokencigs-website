@@ -54,6 +54,10 @@ window.SITE = {
       cover: "/images/covers/the-hilltop-funeral.png",
       badge: "Early Access · Out now",   // optional label on the card
       badgeColor: "#dbc816",              // optional badge colour (leave out for a dark badge)
+      // Used by the big rows on /games/:
+      blurb:  "A chaotic 2-player co-op game where you are a pair of professional pallbearers, carrying a valued client to the funeral home at the hilltop.",
+      store:  { label: "Play on Steam", url: "https://store.steampowered.com/app/3553350/The_Hilltop_Funeral/" },
+      accent: "#dbc816", accentInk: "#1c1c1c",
     },
     {
       id:    "inkression",
@@ -62,13 +66,17 @@ window.SITE = {
       label: "Narrative Exploration",
       cover: "/images/covers/inkression.png",
       badge: "Demo on Steam",
+      blurb:  "A 3D narrative exploration game about collecting the final moments of a dying neighborhood as a tattoo artist.",
+      store:  { label: "Play the demo", url: "https://store.steampowered.com/app/2965930/Inkression/" },
+      accent: "#fcad72", accentInk: "#111111",
     },
   ],
 
   // ── Event years ───────────────────────────────────────────
   // Shown on /events/ and "Browse More Events". Newest first.
   events: [
-    { id: "events-2025", title: "2025", cover: "/images/covers/events-2025.jpg" },
-    { id: "events-2024", title: "2024", cover: "/images/covers/events-2024.jpg" },
+    // `label` is the small line under the year on the card
+    { id: "events-2025", title: "2025", cover: "/images/covers/events-2025.jpg", label: "8 events · Tokyo · Shanghai · San Francisco · NYC" },
+    { id: "events-2024", title: "2024", cover: "/images/covers/events-2024.jpg", label: "4 events · New York City" },
   ],
 };

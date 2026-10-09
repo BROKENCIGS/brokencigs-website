@@ -7,7 +7,7 @@
   <meta name="description" content="BROKENCIGS is a New York based indie game studio founded in 2023.">
   <meta property="og:title" content="About Us — BROKENCIGS">
   <meta property="og:description" content="BROKENCIGS is a New York based indie game studio founded in 2023.">
-  <meta property="og:image" content="https://brokencigs.com/images/brand/share.png">
+  <meta property="og:image" content="https://brokencigs.com/images/about/team-at-gdc.jpg">
   <link rel="canonical" href="https://brokencigs.com/about-us/">
   <link rel="icon" href="/images/brand/favicon-32.png">
   <link rel="apple-touch-icon" href="/images/brand/apple-touch-icon.png">
@@ -20,12 +20,46 @@
 // ── ABOUT US ──────────────────────────────────────────────────
 PAGE = {
   blocks: [
-    { type: "page-title", text: "About Us" },
     {
-      type: "text",
-      body: "BROKENCIGS is a New York based indie game studio founded in 2023.\n\nWe are a team of passionate young designers from around the world, united by a shared dream: to create games that truly reflect who we are.\n\nFor inquiries, please contact us at: [contact@brokencigs.com](mailto:contact@brokencigs.com)",
+      type:       "page-hero",
+      eyebrow:    "Est. 2023 · New York City",
+      title:      "About Us",
+      intro:      "Creating what we believe. Believing in what we make.",
+      background: "/images/events-2025/gdc-1.jpg",
+      position:   "center 45%",
+      aside:      "New York City · 40.71° N 74.01° W",
     },
-    { type: "image", src: "/images/about/team-at-gdc.jpg", alt: "The BROKENCIGS team outside GDC" },
+
+    {
+      type:    "split",
+      eyebrow: "Who we are",
+      title:   "A New York indie game studio.",
+      body:    "BROKENCIGS is a New York based indie game studio founded in 2023.\n\nWe are a team of passionate young designers from around the world, united by a shared dream: to create games that truly reflect who we are.",
+      image:   { src: "/images/about/team-at-gdc.jpg", alt: "The BROKENCIGS team outside GDC" },
+      buttons: [
+        { label: "Our games", url: "/games/" },
+        { label: "Events",    url: "/events/", style: "ghost" },
+      ],
+    },
+
+    {
+      type: "facts",
+      items: [
+        ["Founded",  "2023"],
+        ["Based in", "New York City"],
+        ["Games",    "[The Hilltop Funeral](/the-hilltop-funeral/) · [Inkression](/inkression/)"],
+        ["Contact",  "[contact@brokencigs.com](mailto:contact@brokencigs.com)"],
+      ],
+    },
+
+    {
+      type:    "cta",
+      eyebrow: "Say hello",
+      title:   "Get in touch",
+      text:    "For inquiries, please contact us at contact@brokencigs.com.",
+      buttons: [{ label: "Email us", url: "mailto:contact@brokencigs.com" }],
+      socials: true,
+    },
   ],
 };
 </script>

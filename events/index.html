@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Events — BROKENCIGS</title>
-  <meta name="description" content="Festivals, expos and showcases BROKENCIGS has attended.">
+  <meta name="description" content="Festivals, expos and showcases where BROKENCIGS has brought its games, from New York to Tokyo.">
   <meta property="og:title" content="Events — BROKENCIGS">
-  <meta property="og:description" content="Festivals, expos and showcases BROKENCIGS has attended.">
+  <meta property="og:description" content="Festivals, expos and showcases where BROKENCIGS has brought its games, from New York to Tokyo.">
   <meta property="og:image" content="https://brokencigs.com/images/brand/share.png">
   <link rel="canonical" href="https://brokencigs.com/events/">
   <link rel="icon" href="/images/brand/favicon-32.png">
@@ -21,8 +21,31 @@
 // The year cards come from the `events` list in /site-config.js.
 PAGE = {
   blocks: [
-    { type: "page-title", text: "Events" },
+    {
+      type:       "page-hero",
+      eyebrow:    "On the road",
+      title:      "Events",
+      intro:      "Festivals, expos and showcases where we’ve put our games in players’ hands, from New York to Tokyo.",
+      background: "/images/events-2025/indie-dev-night-1.jpg",
+      aside:      "New York City · 40.71° N 74.01° W",
+    },
+
+    {
+      type:  "chips",
+      title: "Where we’ve shown our games",
+      items: ["New York City", "San Francisco", "National Harbor", "Tokyo", "Shanghai", "Online"],
+    },
+
+    { type: "heading", text: "By year" },
     { type: "cards", source: "events" },
+
+    {
+      type:    "cta",
+      eyebrow: "Organizers",
+      title:   "Bring us to your event",
+      text:    "Running a showcase, festival or meetup? We’d love to bring our games.",
+      buttons: [{ label: "Email us", url: "mailto:contact@brokencigs.com" }],
+    },
   ],
 };
 </script>

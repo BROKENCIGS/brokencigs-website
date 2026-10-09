@@ -182,6 +182,47 @@
         ${b.socials ? socials("socials--cta") : ""}
       </section>`,
 
+    // Cinematic header for section pages: dimmed background art + big title
+    "page-hero": (b) => `
+      <section class="page-hero full">
+        ${b.background ? `<div class="page-hero__bg" style="background-image:url('${esc(b.background)}')${b.position ? `;background-position:${esc(b.position)}` : ""}"></div>` : ""}
+        <div class="page-hero__inner">
+          ${b.eyebrow ? `<p class="eyebrow">${inline(b.eyebrow)}</p>` : ""}
+          <h1 class="page-hero__title">${inline(b.title)}</h1>
+          ${b.intro ? `<p class="page-hero__intro">${inline(b.intro)}</p>` : ""}
+          ${buttons(b.buttons)}
+        </div>
+        ${b.aside ? `<p class="page-hero__aside">${inline(b.aside)}</p>` : ""}
+      </section>`,
+
+    // Big alternating rows for every game in site-config.js (uses each game's
+    // accent, blurb and store button). exclude: "<id>" leaves one out.
+    showcase: (b) => {
+      const games = (SITE.games || []).filter((g) => g.id !== b.exclude);
+      const pad = (n) => String(n).padStart(2, "0");
+      return `<section class="showcase">${games.map((g, i) => {
+        const url = g.url || `/${g.id}/`;
+        const vars = [g.accent && `--show-accent:${g.accent}`, g.accentInk && `--show-ink:${g.accentInk}`].filter(Boolean).join(";");
+        return `
+        <article class="show ${i % 2 ? "show--flip" : ""}" style="${esc(vars)}">
+          <a class="show__media" href="${esc(url)}" aria-label="${esc(g.title)}">
+            <img src="${esc(g.cover)}" alt="" loading="lazy">
+            ${g.badge ? `<span class="card__badge" ${g.badgeColor ? `style="--badge:${esc(g.badgeColor)}"` : ""}>${esc(g.badge)}</span>` : ""}
+          </a>
+          <div class="show__text">
+            <p class="show__num">${pad(i + 1)} <span>/ ${pad(games.length)}</span></p>
+            <h2 class="show__title"><a href="${esc(url)}">${esc(g.title)}</a></h2>
+            <p class="show__meta">${esc([g.label, g.year].filter(Boolean).join(" · "))}</p>
+            ${g.blurb ? `<p class="show__blurb">${inline(g.blurb)}</p>` : ""}
+            <div class="buttons">
+              ${g.store ? `<a class="btn" ${linkAttrs(g.store.url)}>${esc(g.store.label)}</a>` : ""}
+              <a class="btn btn--ghost" href="${esc(url)}">View game</a>
+            </div>
+          </div>
+        </article>`;
+      }).join("")}</section>`;
+    },
+
     // Big centered image with optional heading above and buttons below
     hero: (b) => `
       <section class="hero">
@@ -305,7 +346,7 @@
     // Card grid of games or event years (from site-config.js)
     // { type: "cards", source: "games" | "events", exclude: "<id>" }
     cards: (b) => {
-      const cards = cardsFrom(b.source).filter((c) => c.id !== b.exclude);
+      const cards = (b.items || cardsFrom(b.source)).filter((c) => !b.exclude || c.id !== b.exclude);
       if (!cards.length) return "";
       return `<section class="cards-wrap">${title(b.title)}${cardGrid(cards)}</section>`;
     },

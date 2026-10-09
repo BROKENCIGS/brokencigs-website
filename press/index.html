@@ -18,23 +18,32 @@
 <body>
 <script>
 // ── PRESS ─────────────────────────────────────────────────────
-// Newest coverage first — add new articles at the top of "Media".
+// Newest coverage first. Add new articles at the top of "Coverage".
 PAGE = {
   blocks: [
-    { type: "page-title", text: "Press" },
+    {
+      type:       "page-hero",
+      eyebrow:    "Media & press",
+      title:      "Press",
+      intro:      "Press kits, coverage, and everything you need to write about our games.",
+      background: "/images/covers/events-2024.jpg",
+      aside:      "New York City · 40.71° N 74.01° W",
+    },
 
     {
-      type:  "links",
-      title: "Press Kit",
+      type:  "cards",
+      title: "Press kits",
       items: [
-        { title: "The Hilltop Funeral", url: "https://impress.games/press-kit/brokencigs/the-hilltop-funeral", meta: "impress.games" },
-        { title: "Inkression",          url: "https://impress.games/press-kit/brokencigs/inkression",          meta: "impress.games" },
+        { title: "The Hilltop Funeral", label: "Press kit ↗", cover: "/images/covers/the-hilltop-funeral.png",
+          url: "https://impress.games/press-kit/brokencigs/the-hilltop-funeral" },
+        { title: "Inkression",          label: "Press kit ↗", cover: "/images/covers/inkression.png",
+          url: "https://impress.games/press-kit/brokencigs/inkression" },
       ],
     },
 
     {
       type:  "links",
-      title: "Media",
+      title: "Coverage",
       items: [
         { title: "I Make Games in New York… About Carrying Coffins",
           url: "https://mp.weixin.qq.com/s/40uo7gudDK7MLKStFDZrXw",
@@ -55,8 +64,12 @@ PAGE = {
     },
 
     {
-      type: "text",
-      body: "If you are press, media, or content creators who would like to work with us, please email us at: [contact@brokencigs.com](mailto:contact@brokencigs.com)",
+      type:    "cta",
+      eyebrow: "Press, media & creators",
+      title:   "Let’s work together",
+      text:    "If you are press, media, or content creators who would like to work with us, please email us.",
+      buttons: [{ label: "contact@brokencigs.com", url: "mailto:contact@brokencigs.com" }],
+      socials: true,
     },
   ],
 };

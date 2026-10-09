@@ -139,6 +139,22 @@ Inside a `"..."` string, write `\"` for a double quote, or just use curly quotes
     { title: "Article headline", url: "https://...", meta: "April 2025 · Outlet · English" },
 ] }
 
+// SECTION PAGE BLOCKS ──────────────────────────────────────
+
+// Big header for Games / Events / Press / About: dimmed background photo + huge title
+{ type: "page-hero", eyebrow: "small label", title: "Games", intro: "One line under the title",
+  background: "/images/...", position: "center 40%",   // optional: which part of the photo to show
+  aside: "New York City · 40.71° N 74.01° W" }          // optional: vertical text on the right
+
+// Big alternating rows for every game in site-config.js (exclude: "<id>" to skip one).
+// Each game's row uses its blurb, store button, badge and accent colour from site-config.js.
+{ type: "showcase" }
+
+// Card grid with your own cards instead of games/events
+{ type: "cards", title: "Press kits", items: [
+    { title: "The Hilltop Funeral", label: "Press kit ↗", cover: "/images/...", url: "https://..." },
+] }
+
 // HOME PAGE BLOCKS ─────────────────────────────────────────
 
 // Full-screen spotlight on one game. accent recolours the badge, button and glow.
@@ -188,7 +204,11 @@ Inside a `"..."` string, write `\"` for a double quote, or just use curly quotes
 4. Add it to `games` in `site-config.js`. Order there = order on the site.
 
 ```js
-{ id: "my-new-game", title: "My New Game", year: "2028", label: "Genre", cover: "/images/covers/my-new-game.png" },
+{ id: "my-new-game", title: "My New Game", year: "2028", label: "Genre", cover: "/images/covers/my-new-game.png",
+  badge: "Coming soon",                        // optional label on the card
+  blurb: "One or two sentences for /games/.",
+  store: { label: "Wishlist on Steam", url: "https://..." },
+  accent: "#ff4d4d", accentInk: "#111111" },  // this game's colour on /games/
 ```
 
 ### Add a new events year (e.g. 2026)

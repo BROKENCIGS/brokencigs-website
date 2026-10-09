@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Games — BROKENCIGS</title>
-  <meta name="description" content="Games by BROKENCIGS, a New York indie game studio.">
+  <meta name="description" content="Games by BROKENCIGS, a New York indie game studio: The Hilltop Funeral and Inkression.">
   <meta property="og:title" content="Games — BROKENCIGS">
-  <meta property="og:description" content="Games by BROKENCIGS, a New York indie game studio.">
+  <meta property="og:description" content="Games by BROKENCIGS, a New York indie game studio: The Hilltop Funeral and Inkression.">
   <meta property="og:image" content="https://brokencigs.com/images/brand/share.png">
   <link rel="canonical" href="https://brokencigs.com/games/">
   <link rel="icon" href="/images/brand/favicon-32.png">
@@ -18,11 +18,31 @@
 <body>
 <script>
 // ── GAMES ─────────────────────────────────────────────────────
-// The game cards come from the `games` list in /site-config.js.
+// The big game rows come from the `games` list in /site-config.js
+// (cover, badge, blurb, store button and accent colour for each game).
 PAGE = {
   blocks: [
-    { type: "page-title", text: "Games" },
-    { type: "cards", source: "games" },
+    {
+      type:       "page-hero",
+      eyebrow:    "BROKENCIGS · Games",
+      title:      "Games",
+      intro:      "Co-op chaos and quiet, personal stories, made by a small team in New York.",
+      background: "/images/inkression/gallery-11.jpg",
+      aside:      "New York City · 40.71° N 74.01° W",
+    },
+
+    { type: "showcase" },
+
+    {
+      type:    "cta",
+      eyebrow: "Publishers & partners",
+      title:   "Want to work with us?",
+      text:    "We’d love to hear from publishers, investors and anyone who wants to support what we make.",
+      buttons: [
+        { label: "Email us",   url: "mailto:contact@brokencigs.com" },
+        { label: "Press kits", url: "/press/", style: "ghost" },
+      ],
+    },
   ],
 };
 </script>
