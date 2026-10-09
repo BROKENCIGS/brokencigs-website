@@ -200,10 +200,13 @@ body.scrolled .site-header, body.menu-open .site-header {
 a.hero__img:hover img { transform: scale(1.02); }
 
 .game-hero { position: relative; text-align: center; }
-.game-hero__title-logo { display: block; width: min(760px, 92%); margin: 0 auto 28px; transition: transform .4s ease; }
+.game-hero__title-logo { display: block; width: min(1000px, 96%); margin: 0 auto 36px; transition: transform .4s ease; }
 a.game-hero__title-logo:hover { transform: scale(1.02); }
 .game-hero__title-logo img { width: 100%; }
 .game-hero__sub { font-size: 19px; margin: 0 auto 20px; max-width: 600px; }
+.game-hero .btn { padding: 22px 48px; font-size: 18px; }
+@media (max-width: 560px) { .game-hero .btn { padding: 18px 34px; font-size: 16px; } }
+.site-main > .game-hero + * { margin-top: clamp(72px, 10vw, 128px); }   /* space below the logo & button */
 
 /* ── Video, facts, images ─────────────────────────────────── */
 .video { max-width: 880px; margin-left: auto; margin-right: auto; }
@@ -214,6 +217,7 @@ a.game-hero__title-logo:hover { transform: scale(1.02); }
 .facts {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   margin: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+  background: var(--surface);   /* solid, so background art never shows through */
 }
 .fact { padding: 20px 22px; border-right: 1px solid var(--line); margin-right: -1px; }
 .fact dt { font: 500 12px/1.4 var(--font-display); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
