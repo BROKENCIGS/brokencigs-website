@@ -34,10 +34,10 @@ The site uses absolute paths (`/images/...`), so open it through a tiny local se
 
 ```bash
 cd C:\Users\lukel\Downloads\brokencigs-website
-python -m http.server 8080
+python serve.py
 ```
 
-Then open http://localhost:8080. (VS Code's "Live Server" extension works too — open the folder itself, not a parent folder.)
+Then open http://localhost:8080. If port 8080 is busy, run `python serve.py 8081` and open http://localhost:8081 instead. `serve.py` turns off browser caching, so a normal refresh always shows your latest edits. If a page ever looks out of date somewhere else, press **Ctrl+Shift+R** to force a fresh load. (VS Code's "Live Server" extension works too — open the folder itself, not a parent folder.)
 
 ---
 
@@ -169,7 +169,8 @@ Inside a `"..."` string, write `\"` for a double quote, or just use curly quotes
 
 // Text beside an image (flip: true puts the image on the left)
 { type: "split", eyebrow: "small label", title: "Big heading", body: "Paragraphs...",
-  image: "/images/about/team-at-gdc.jpg", buttons: [ ... ] }
+  image: "/images/about/team-at-gdc.jpg", imageSize: "small",   // imageSize optional
+  buttons: [ ... ] }
 
 // Big row of names separated by ✢ (url optional per item)
 { type: "chips", title: "Our games have been shown at",

@@ -140,7 +140,7 @@
 
     // Text on one side, image on the other (flip: true swaps sides)
     split: (b) => `
-      <section class="split ${b.flip ? "split--flip" : ""}">
+      <section class="split ${b.flip ? "split--flip" : ""} ${b.imageSize === "small" ? "split--small" : ""}">
         <div class="split__text">
           ${b.eyebrow ? `<p class="eyebrow">${inline(b.eyebrow)}</p>` : ""}
           ${b.title ? `<h2 class="split__title">${inline(b.title)}</h2>` : ""}

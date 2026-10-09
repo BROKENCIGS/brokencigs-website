@@ -443,11 +443,12 @@ a.promo__logo:hover { transform: scale(1.02); }
 /* ── Split (text + image) ─────────────────────────────────── */
 .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: center; }
 .split--flip .split__media { order: -1; }
+.split--small { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); }   /* imageSize: "small" */
 .split__title { font-size: clamp(34px, 4.8vw, 58px); line-height: 1.05; letter-spacing: -.03em; margin-bottom: 24px; }
 .split .prose { margin-left: 0; color: #d6d6d6; }
 .split .buttons { margin-top: 32px; }
 .split__media .media { width: 100%; border-radius: var(--radius); }
-@media (max-width: 800px) { .split { grid-template-columns: 1fr; } .split--flip .split__media { order: 0; } }
+@media (max-width: 800px) { .split, .split--small { grid-template-columns: 1fr; } .split--flip .split__media { order: 0; } .split--small .split__media { max-width: 420px; } }
 
 /* ── Chips ("shown at") ───────────────────────────────────── */
 .chips { text-align: center; }
