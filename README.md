@@ -144,6 +144,7 @@ Inside a `"..."` string, write `\"` for a double quote, or just use curly quotes
 // Big header for Games / Events / Press / About: dimmed background photo + huge title
 { type: "page-hero", eyebrow: "small label", title: "Games", intro: "One line under the title",
   background: "/images/...", position: "center 40%",   // optional: which part of the photo to show
+  opacity: 0.42,                                        // optional: photo strength 0–1 (default 0.42)
   aside: "New York City · 40.71° N 74.01° W" }          // optional: vertical text on the right
 
 // Big alternating rows for every game in site-config.js (exclude: "<id>" to skip one).

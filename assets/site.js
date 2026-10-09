@@ -185,7 +185,7 @@
     // Cinematic header for section pages: dimmed background art + big title
     "page-hero": (b) => `
       <section class="page-hero full">
-        ${b.background ? `<div class="page-hero__bg" style="background-image:url('${esc(b.background)}')${b.position ? `;background-position:${esc(b.position)}` : ""}"></div>` : ""}
+        ${b.background ? `<div class="page-hero__bg" style="background-image:url('${esc(b.background)}')${b.position ? `;background-position:${esc(b.position)}` : ""}${b.opacity != null ? `;opacity:${+b.opacity}` : ""}"></div>` : ""}
         <div class="page-hero__inner">
           ${b.eyebrow ? `<p class="eyebrow">${inline(b.eyebrow)}</p>` : ""}
           <h1 class="page-hero__title">${inline(b.title)}</h1>
