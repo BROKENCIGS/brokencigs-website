@@ -801,14 +801,14 @@ a.event__lead:hover { transform: translateY(-3px); }
 }
 
 /* ── Custom cursor ─────────────────────────────────────────
-   A small black-and-white cigarette that snaps in two over anything clickable.
+   The logo's outlined cigarette; it bends into the logo's broken "V" over anything clickable.
    Only for mouse/trackpad (phones & tablets keep their normal behaviour).
    To turn it off, delete this block. Images: assets/cursor.svg, assets/cursor-hover.svg */
 @media (pointer: fine) {
-  html, body { cursor: url("/assets/cursor.svg") 5 5, auto; }
+  html, body { cursor: url("/assets/cursor.svg") 3 4, auto; }
   a, button, summary, label, select, [role="button"],
   .slideshow__thumb, .slideshow__btn, .lightbox button, .menu-btn {
-    cursor: url("/assets/cursor-hover.svg") 5 5, pointer;
+    cursor: url("/assets/cursor-hover.svg") 3 4, pointer;
   }
   img[data-lightbox], .feat__media .media { cursor: zoom-in; }   /* keep the "enlarge" hint on clickable images */
   input, textarea, [contenteditable] { cursor: text; }

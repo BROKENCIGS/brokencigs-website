@@ -1,8 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
-  <!-- Default cursor: a plain cigarette; the ash tip (top-left) is the click point -->
-  <g transform="rotate(45 16 16)" stroke="#0b0b0b" stroke-width="1.2" stroke-linejoin="round">
-    <rect x="3" y="13.6" width="27" height="4.8" rx="1.2" fill="#ffffff"/>
-    <rect x="3" y="13.6" width="3.2" height="4.8" rx="1.2" fill="#8a8a8a"/>
-    <line x1="22.5" y1="13.6" x2="22.5" y2="18.4"/>
+  <!-- Default cursor: the logo's outlined cigarette, straight. Its left end is the click point.
+       Dark pass underneath keeps the white outline visible on light backgrounds. -->
+  <g transform="translate(4 6) rotate(22)" stroke-linejoin="round" stroke-linecap="round">
+    <g fill="#0b0b0b" stroke="#0b0b0b" stroke-width="3.4">
+      <path d="M0 -2.5 H26 V2.5 H0 Z"/>
+    </g>
+    <g fill="none" stroke="#ffffff" stroke-width="1.5">
+      <path d="M0 -2.5 H26 V2.5 H0 Z"/>
+      <path d="M8 -2.5 V2.5"/>
+    </g>
   </g>
 </svg>
