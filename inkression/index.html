@@ -21,13 +21,16 @@
 // ── INKRESSION ────────────────────────────────────────────────
 PAGE = {
   section: "/games/",
-  accent:    "#ffffff",        // white buttons & highlights, like the original
-  accentInk: "#000000",
+  accent:       "#fcad72",     // orange highlights (tagline emphasis, ✢ markers, links)
+  headingColor: "#fcad72",     // section headings & character names
+  button:       "#ffffff",     // white buttons with black text
+  buttonInk:    "#000000",
   background: {
     image:    "/images/inkression/page-background.gif",
     size:     "100% auto",       // stretch to the full page width
     position: "top left",
     height:   "54.2vw",          // = image height at full width (400 / 739)
+    opacity:  0.4,               // 0 = invisible, 1 = full strength
   },
   blocks: [
     {
@@ -55,9 +58,9 @@ PAGE = {
     {
       type:  "tagline",
       lines: [
-        "Stories written beneath the skins of a dying city.",
-        "Colors buried behind the eyes of a returning stranger.",
-        "Memories tattooed onto the skins of the drifting souls.",
+        "Stories written beneath the skins of **a dying city**.",
+        "Colors buried behind the eyes of **a returning stranger**.",
+        "Memories tattooed onto the skins of **the drifting souls**.",
       ],
     },
 

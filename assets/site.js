@@ -299,6 +299,9 @@
   const rootStyle = document.documentElement.style;
   if (PAGE.accent)    rootStyle.setProperty("--accent", PAGE.accent);
   if (PAGE.accentInk) rootStyle.setProperty("--accent-ink", PAGE.accentInk);
+  if (PAGE.button)    rootStyle.setProperty("--btn-bg", PAGE.button);
+  if (PAGE.buttonInk) rootStyle.setProperty("--btn-ink", PAGE.buttonInk);
+  if (PAGE.headingColor) rootStyle.setProperty("--heading", PAGE.headingColor);
 
   // Optional page background art at the top, fading into the page colour
   if (PAGE.background && PAGE.background.image) {
@@ -310,6 +313,7 @@
     el.style.backgroundSize = bg.size || "cover";
     el.style.backgroundPosition = bg.position || "top center";
     el.style.height = bg.height || "100vh";
+    if (bg.opacity != null) el.style.opacity = bg.opacity;
     document.body.prepend(el);
   }
   if (PAGE.theme) document.body.classList.add("theme-" + PAGE.theme);
