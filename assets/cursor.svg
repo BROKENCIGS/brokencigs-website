@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
-  <!-- Default cursor: the logo's outlined cigarette, straight. Its left end is the click point.
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Default cursor: the logo's outlined cigarette, straight, tilted like a normal arrow pointer. Its left end is the click point.
        Dark pass underneath keeps the white outline visible on light backgrounds. -->
-  <g transform="translate(4 6) rotate(22)" stroke-linejoin="round" stroke-linecap="round">
+  <g transform="translate(4 6) rotate(60)" stroke-linejoin="round" stroke-linecap="round">
     <g fill="#0b0b0b" stroke="#0b0b0b" stroke-width="3.4">
       <path d="M0 -2.5 H26 V2.5 H0 Z"/>
     </g>
