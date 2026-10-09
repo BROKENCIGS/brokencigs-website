@@ -333,13 +333,41 @@
           </article>`).join("")}
       </section>`,
 
-    // Grid of images that open full-screen on click
+    // Grid of images that open full-screen on click.
+    // layout: "slideshow" shows one big image at a time with arrows, thumbnails and autoplay
+    // (autoplay: seconds between slides, 0 = off; default 5).
     gallery: (b) => {
       const group = "g" + Math.random().toString(36).slice(2, 7);
+      const images = b.images || [];
+      if (b.layout === "slideshow") {
+        const total = String(images.length).padStart(2, "0");
+        const secs = b.autoplay == null ? 5 : +b.autoplay;
+        return `
+      <section class="gallery">
+        ${title(b.title)}
+        <div class="slideshow" tabindex="0" aria-roledescription="carousel" aria-label="${esc(b.title || "Gallery")}" data-autoplay="${secs}">
+          <div class="slideshow__stage">
+            <div class="slideshow__track">
+              ${images.map((m) => `<div class="slideshow__slide">${media(m, { lightbox: group })}</div>`).join("")}
+            </div>
+            <button class="slideshow__btn slideshow__prev" aria-label="Previous image">‹</button>
+            <button class="slideshow__btn slideshow__next" aria-label="Next image">›</button>
+            <p class="slideshow__count"><span class="slideshow__current">01</span> / ${total}</p>
+            ${secs > 0 ? `<div class="slideshow__progress" style="--dur:${secs}s"></div>` : ""}
+          </div>
+          <div class="slideshow__thumbs">
+            ${images.map((m, i) => {
+              const src = typeof m === "string" ? m : m.src;
+              return `<button class="slideshow__thumb" data-i="${i}" aria-label="Show image ${i + 1}"><img src="${esc(src)}" alt="" loading="lazy"></button>`;
+            }).join("")}
+          </div>
+        </div>
+      </section>`;
+      }
       return `
       <section class="gallery">
         ${title(b.title)}
-        <div class="gallery__grid">${(b.images || []).map((m) => media(m, { lightbox: group })).join("")}</div>
+        <div class="gallery__grid">${images.map((m) => media(m, { lightbox: group })).join("")}</div>
       </section>`;
     },
 
@@ -564,6 +592,73 @@
     if (e.key === "Escape") close();
     if (e.key === "ArrowLeft") show(idx - 1);
     if (e.key === "ArrowRight") show(idx + 1);
+  });
+
+  // ── Slideshows ────────────────────────────────────────────
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  main.querySelectorAll(".slideshow").forEach((show) => {
+    const track = show.querySelector(".slideshow__track");
+    const slides = [...show.querySelectorAll(".slideshow__slide")];
+    const thumbs = [...show.querySelectorAll(".slideshow__thumb")];
+    const thumbBar = show.querySelector(".slideshow__thumbs");
+    const current = show.querySelector(".slideshow__current");
+    const progress = show.querySelector(".slideshow__progress");
+    const delay = (+show.dataset.autoplay || 0) * 1000;
+    let i = 0, timer = null, paused = false;
+
+    const go = (n, user) => {
+      i = (n + slides.length) % slides.length;
+      track.style.transform = `translateX(${-i * 100}%)`;
+      current.textContent = String(i + 1).padStart(2, "0");
+      thumbs.forEach((t, k) => t.classList.toggle("is-active", k === i));
+      const t = thumbs[i];
+      thumbBar.scrollTo({ left: t.offsetLeft - (thumbBar.clientWidth - t.offsetWidth) / 2, behavior: "smooth" });
+      if (user) restart();
+      else if (progress) { progress.classList.remove("run"); void progress.offsetWidth; progress.classList.add("run"); }
+    };
+    const restart = () => {
+      clearInterval(timer);
+      if (progress) { progress.classList.remove("run"); void progress.offsetWidth; }
+      if (!delay || reduceMotion || paused) return;
+      if (progress) progress.classList.add("run");
+      timer = setInterval(() => go(i + 1), delay);
+    };
+    const pause = (p) => { paused = p; show.classList.toggle("is-paused", p); restart(); };
+
+    show.querySelector(".slideshow__prev").addEventListener("click", () => go(i - 1, true));
+    show.querySelector(".slideshow__next").addEventListener("click", () => go(i + 1, true));
+    thumbs.forEach((t) => t.addEventListener("click", () => go(+t.dataset.i, true)));
+    show.addEventListener("keydown", (e) => {
+      if (lb.classList.contains("open")) return;
+      if (e.key === "ArrowLeft")  { e.preventDefault(); go(i - 1, true); }
+      if (e.key === "ArrowRight") { e.preventDefault(); go(i + 1, true); }
+    });
+    show.addEventListener("mouseenter", () => pause(true));
+    show.addEventListener("mouseleave", () => pause(false));
+    document.addEventListener("visibilitychange", () => pause(document.hidden));
+
+    // Swipe on touch screens (a swipe doesn't count as a click on the image)
+    const stage = show.querySelector(".slideshow__stage");
+    let startX = null, swiped = false;
+    stage.addEventListener("pointerdown", (e) => { startX = e.clientX; swiped = false; });
+    stage.addEventListener("pointerup", (e) => {
+      if (startX === null) return;
+      const dx = e.clientX - startX; startX = null;
+      if (Math.abs(dx) > 40) { swiped = true; go(dx < 0 ? i + 1 : i - 1, true); }
+    });
+    stage.addEventListener("click", (e) => { if (swiped) { e.stopPropagation(); swiped = false; } }, true);
+
+    // Load every slide once the slideshow is close to the screen, so sliding never shows a blank frame
+    const imgs = show.querySelectorAll(".slideshow__slide img");
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((en) => {
+        if (en.some((x) => x.isIntersecting)) { imgs.forEach((im) => (im.loading = "eager")); io.disconnect(); }
+      }, { rootMargin: "600px 0px" });
+      io.observe(show);
+    } else imgs.forEach((im) => (im.loading = "eager"));
+
+    go(0);
+    restart();
   });
 
   // Fade blocks in as they scroll into view

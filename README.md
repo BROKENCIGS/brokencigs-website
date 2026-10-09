@@ -125,6 +125,9 @@ Inside a `"..."` string, write `\"` for a double quote, or just use curly quotes
 // Image grid — click to view full screen, arrow keys to browse
 { type: "gallery", title: "Gallery", images: ["/images/...", "/images/..."] }
 
+// Same, as a slideshow: big image, arrows, thumbnails, swipe, autoplay (seconds; 0 = off)
+{ type: "gallery", title: "Gallery", layout: "slideshow", autoplay: 5, images: [ ... ] }
+
 // One event (see events-2025/index.html). Use youtube instead of image for a video.
 { type: "event", title: "Tokyo Game Show", date: "September", location: "Tokyo, Japan",
   body: "...", image: "/images/events-2025/tgs.png", link: "https://... (optional)",

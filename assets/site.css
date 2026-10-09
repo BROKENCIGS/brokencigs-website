@@ -604,6 +604,58 @@ img[data-lightbox] { cursor: zoom-in; }
 .gallery__grid .media { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; transition: opacity .2s; }
 .gallery__grid .media:hover { opacity: .8; }
 
+/* ── Slideshow gallery ────────────────────────────────────── */
+.slideshow { outline: none; }
+.slideshow__stage {
+  position: relative; overflow: hidden; border-radius: var(--radius); background: #000;
+  box-shadow: 0 40px 120px -50px color-mix(in srgb, var(--accent) 55%, transparent);
+  touch-action: pan-y;
+}
+.slideshow:focus-visible .slideshow__stage { outline: 2px solid var(--accent); outline-offset: 4px; }
+.slideshow__track { display: flex; transition: transform .7s var(--ease-out); }
+.slideshow__slide { flex: 0 0 100%; }
+.slideshow__slide .media { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.slideshow__btn {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,.25); background: rgba(0,0,0,.45); color: #fff;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  font: 300 32px/1 var(--font-body); padding-bottom: 4px; cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s, transform .2s;
+}
+.slideshow__btn:hover { background: var(--accent); color: #111; border-color: var(--accent); }
+.slideshow__prev { left: 16px; }
+.slideshow__next { right: 16px; }
+.slideshow__count {
+  position: absolute; left: 16px; bottom: 16px; margin: 0; z-index: 2;
+  padding: 7px 12px; border-radius: 999px; background: rgba(0,0,0,.55); color: var(--muted);
+  font: 500 12px/1 var(--font-display); letter-spacing: .16em;
+}
+.slideshow__current { color: #fff; }
+.slideshow__progress {
+  position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; z-index: 2;
+  background: var(--accent); transform-origin: left; transform: scaleX(0);
+}
+.slideshow__progress.run { animation: slideshow-progress var(--dur) linear forwards; }
+.slideshow.is-paused .slideshow__progress { animation-play-state: paused; }
+@keyframes slideshow-progress { to { transform: scaleX(1); } }
+.slideshow__thumbs {
+  display: flex; gap: 10px; margin-top: 14px; padding-bottom: 6px;
+  overflow-x: auto; scrollbar-width: thin; scrollbar-color: #333 transparent;
+}
+.slideshow__thumb {
+  flex: 0 0 clamp(96px, 12vw, 150px); aspect-ratio: 16 / 9; padding: 0; overflow: hidden;
+  border: 2px solid transparent; border-radius: 6px; background: var(--surface);
+  opacity: .45; cursor: pointer; transition: opacity .25s, border-color .25s;
+}
+.slideshow__thumb:hover { opacity: .8; }
+.slideshow__thumb.is-active { opacity: 1; border-color: var(--accent); }
+.slideshow__thumb img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 560px) {
+  .slideshow__btn { width: 40px; height: 40px; font-size: 26px; }
+  .slideshow__prev { left: 8px; } .slideshow__next { right: 8px; }
+}
+
 /* ── Events ───────────────────────────────────────────────── */
 .event { padding-top: clamp(40px, 6vw, 64px); border-top: 1px solid var(--line); }
 .page-head + .event { border-top: 0; padding-top: 0; }
