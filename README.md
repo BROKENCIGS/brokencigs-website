@@ -30,10 +30,10 @@ Every page's URL is its folder name: `inkression/index.html` → `brokencigs.com
 
 ## Previewing locally
 
-The site uses absolute paths (`/images/...`), so open it through a tiny local server, not by double-clicking the file:
+The site uses absolute paths (`/images/...`), so open it through a tiny local server, not by double-clicking the file. In a terminal opened in this folder:
 
 ```bash
-cd C:\Users\lukel\Downloads\brokencigs-website
+cd path/to/brokencigs-website
 python serve.py
 ```
 
