@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BROKENCIGS — New York Indie Game Studio</title>
+  <meta name="description" content="New York indie game studio. Creating what we believe. Believing in what we make.">
+  <meta name="keywords" content="indie game, indie game studio, new york indie game studio, nyc game studio, brokencigs, nyc indie">
+  <meta property="og:title" content="BROKENCIGS">
+  <meta property="og:description" content="New York indie game studio. Creating what we believe. Believing in what we make.">
+  <meta property="og:image" content="https://brokencigs.com/images/brand/share.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://brokencigs.com/">
+  <link rel="icon" href="/images/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="/images/brand/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/site-config.js" defer></script>
+  <script src="/assets/site.js" defer></script>
+</head>
+<body>
+<script>
+// ── HOME PAGE CONTENT ─────────────────────────────────────────
+// Block types are listed in README.md. Reorder, add or remove freely.
+PAGE = {
+  blocks: [
+    {
+      type:    "hero",
+      title:   "Available now in Early Access!",
+      image:   "/images/home-page/hilltop-early-access.png",
+      link:    "/the-hilltop-funeral/",
+      buttons: [
+        { label: "Play now on Steam", url: "https://store.steampowered.com/app/3553350/The_Hilltop_Funeral/" },
+        { label: "Learn more",        url: "/the-hilltop-funeral/", style: "ghost" },
+      ],
+    },
+
+    { type: "divider" },
+
+    {
+      type:  "tagline",
+      lines: ["Creating what we believe.", "Believing in what we make."],
+    },
+
+    { type: "heading", text: "Our Games" },
+    { type: "cards", source: "games" },
+    { type: "buttons", items: [{ label: "Browse all games", url: "/games/", style: "ghost" }] },
+  ],
+};
+</script>
+</body>
+</html>
