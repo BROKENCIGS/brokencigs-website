@@ -139,6 +139,35 @@ Inside a `"..."` string, write `\"` for a double quote, or just use curly quotes
     { title: "Article headline", url: "https://...", meta: "April 2025 · Outlet · English" },
 ] }
 
+// HOME PAGE BLOCKS ─────────────────────────────────────────
+
+// Full-screen spotlight on one game. accent recolours the badge, button and glow.
+{ type: "promo", title: "Game Name", badge: "Early Access · Out now on Steam",
+  logo: "/images/game/logo.png", link: "/game/", background: "/images/game/page-background.png",
+  accent: "#dbc816", accentInk: "#1c1c1c",
+  text: "One-line pitch.", buttons: [ ... ], meta: ["Genre", "2 Players", "Steam"] }
+
+// Tilted scrolling ticker band (link optional; pauses on hover)
+{ type: "marquee", link: "https://...", color: "#dbc816", ink: "#111111",
+  items: ["The Hilltop Funeral", "Early Access out now", "Play on Steam"] }
+
+// Text beside an image (flip: true puts the image on the left)
+{ type: "split", eyebrow: "small label", title: "Big heading", body: "Paragraphs...",
+  image: "/images/about/team-at-gdc.jpg", buttons: [ ... ] }
+
+// Big row of names separated by ✢ (url optional per item)
+{ type: "chips", title: "Our games have been shown at",
+  items: [ { label: "Tokyo Game Show", url: "/events-2025/" }, "GDC" ] }
+
+// Press headline cards
+{ type: "quotes", title: "In the press", items: [
+    { text: "Headline", source: "Outlet · Month Year", url: "https://..." },
+  ], buttons: [ ... ] }
+
+// Call-to-action panel (socials: true adds the social icons)
+{ type: "cta", eyebrow: "Stay in the loop", title: "Follow the studio", text: "...",
+  buttons: [ { label: "Subscribe", url: "https://..." } ], socials: true }
+
 // Thin horizontal line
 { type: "divider" }
 
@@ -170,7 +199,10 @@ Inside a `"..."` string, write `\"` for a double quote, or just use curly quotes
 Copy one `{ type: "event", ... }` block in that year's `index.html`, paste it at the top of the list, and edit it.
 
 ### Add a press article
-Add a line to the top of the "Media" `items` in `press/index.html`.
+Add a line to the top of the "Media" `items` in `press/index.html`. To feature it on the home page too, add it to the `quotes` block in `index.html`.
+
+### Feature a different game on the home page
+Edit the `promo` and `marquee` blocks at the top of `index.html`: swap the logo, background, link, accent colour and text. The card badges ("Early Access · Out now", "Demo on Steam") are the `badge` / `badgeColor` fields in `site-config.js`.
 
 ### Add a completely new page (e.g. /jobs)
 Copy `about-us/` → `jobs/`, edit the content, and add `{ label: "Jobs", url: "/jobs/" }` to `nav` in `site-config.js` if it belongs in the menu.

@@ -43,8 +43,10 @@ window.SITE = {
       id:    "the-hilltop-funeral",
       title: "The Hilltop Funeral",
       year:  "2025",
-      label: "Physics Co-op · Early Access",
+      label: "Physics Co-op",
       cover: "/images/covers/the-hilltop-funeral.png",
+      badge: "Early Access · Out now",   // optional label on the card
+      badgeColor: "#dbc816",              // optional badge colour (leave out for a dark badge)
     },
     {
       id:    "inkression",
@@ -52,6 +54,7 @@ window.SITE = {
       year:  "2027",
       label: "Narrative Exploration",
       cover: "/images/covers/inkression.png",
+      badge: "Demo on Steam",
     },
   ],
 

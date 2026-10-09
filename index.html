@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BROKENCIGS — New York Indie Game Studio</title>
-  <meta name="description" content="New York indie game studio. Creating what we believe. Believing in what we make.">
-  <meta name="keywords" content="indie game, indie game studio, new york indie game studio, nyc game studio, brokencigs, nyc indie">
-  <meta property="og:title" content="BROKENCIGS">
+  <meta name="description" content="New York indie game studio. Creating what we believe. Believing in what we make. The Hilltop Funeral is out now in Early Access on Steam.">
+  <meta name="keywords" content="indie game, indie game studio, new york indie game studio, nyc game studio, brokencigs, nyc indie, the hilltop funeral, inkression">
+  <meta property="og:title" content="BROKENCIGS — The Hilltop Funeral is out now in Early Access">
   <meta property="og:description" content="New York indie game studio. Creating what we believe. Believing in what we make.">
-  <meta property="og:image" content="https://brokencigs.com/images/brand/share.png">
+  <meta property="og:image" content="https://brokencigs.com/images/home-page/hilltop-early-access.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://brokencigs.com/">
   <link rel="icon" href="/images/brand/favicon-32.png">
@@ -21,29 +21,98 @@
 <script>
 // ── HOME PAGE CONTENT ─────────────────────────────────────────
 // Block types are listed in README.md. Reorder, add or remove freely.
+// To feature a different game later, edit the "promo" and "marquee" blocks.
 PAGE = {
   blocks: [
+
+    // 1. Full-screen spotlight on the game we're promoting
     {
-      type:    "hero",
-      title:   "Available now in Early Access!",
-      image:   "/images/home-page/hilltop-early-access.png",
-      link:    "/the-hilltop-funeral/",
+      type:       "promo",
+      title:      "The Hilltop Funeral",
+      badge:      "Early Access · Out now on Steam",
+      logo:       "/images/the-hilltop-funeral/logo.png",
+      link:       "/the-hilltop-funeral/",
+      background: "/images/the-hilltop-funeral/page-background.png",
+      accent:     "#dbc816",
+      accentInk:  "#1c1c1c",
+      text:       "A chaotic 2-player co-op game about two professional pallbearers, one very fragile client, and a long way up to the funeral home on the hill.",
       buttons: [
-        { label: "Play now on Steam", url: "https://store.steampowered.com/app/3553350/The_Hilltop_Funeral/" },
-        { label: "Learn more",        url: "/the-hilltop-funeral/", style: "ghost" },
+        { label: "Play on Steam", url: "https://store.steampowered.com/app/3553350/The_Hilltop_Funeral/" },
+        { label: "Watch the trailer", url: "/the-hilltop-funeral/", style: "ghost" },
+      ],
+      meta: ["Physics Co-op", "2 Players", "Steam Early Access"],
+    },
+
+    // 2. Scrolling ticker (click goes to Steam)
+    {
+      type:  "marquee",
+      link:  "https://store.steampowered.com/app/3553350/The_Hilltop_Funeral/",
+      color: "#dbc816",
+      ink:   "#111111",
+      items: ["The Hilltop Funeral", "Early Access out now", "Grab a friend", "Carry the casket", "Deliver the dead", "Play on Steam"],
+    },
+
+    // 3. Who we are
+    {
+      type:    "split",
+      eyebrow: "BROKENCIGS · Est. 2023 · New York City",
+      title:   "Creating what we believe. Believing in what we make.",
+      body:    "BROKENCIGS is a New York based indie game studio founded in 2023.\n\nWe are a team of passionate young designers from around the world, united by a shared dream: to create games that truly reflect who we are.",
+      image:   { src: "/images/about/team-at-gdc.jpg", alt: "The BROKENCIGS team outside GDC" },
+      buttons: [
+        { label: "About us", url: "/about-us/", style: "ghost" },
+        { label: "Events",   url: "/events/",   style: "ghost" },
       ],
     },
 
-    { type: "divider" },
-
+    // 4. Where we've shown our games
     {
-      type:  "tagline",
-      lines: ["Creating what we believe.", "Believing in what we make."],
+      type:  "chips",
+      title: "Our games have been shown at",
+      items: [
+        { label: "Tokyo Game Show",           url: "/events-2025/" },
+        { label: "GDC",                       url: "/events-2025/" },
+        { label: "Day of the Devs",           url: "/events-2025/" },
+        { label: "WePlay Expo",               url: "/events-2025/" },
+        { label: "COREBLAZER Game Fest",      url: "/events-2025/" },
+        { label: "SUPER MAGFest",             url: "/events-2025/" },
+        { label: "Game Devs of Color Expo",   url: "/events-2025/" },
+        { label: "Anime NYC x Play NYC",      url: "/events-2024/" },
+        { label: "NYU Game Center Incubator", url: "/events-2024/" },
+      ],
     },
 
+    // 5. Games (cards come from site-config.js)
     { type: "heading", text: "Our Games" },
     { type: "cards", source: "games" },
-    { type: "buttons", items: [{ label: "Browse all games", url: "/games/", style: "ghost" }] },
+
+    // 6. Press headlines (full list lives on /press/)
+    {
+      type:  "quotes",
+      title: "In the press",
+      items: [
+        { text: "I Make Games in New York… About Carrying Coffins",
+          source: "游戏葡萄 · December 2025",
+          url: "https://mp.weixin.qq.com/s/40uo7gudDK7MLKStFDZrXw" },
+        { text: "Forget Steam Next Fest, Inkression Is The Best Demo I’ve Played This Year",
+          source: "TheGamer · November 2024",
+          url: "https://www.thegamer.com/inkression-demo/" },
+        { text: "‘Inkression’ Captures Stories Through Tattoo Artwork",
+          source: "Indie Games Plus · April 2025",
+          url: "https://indiegamesplus.com/inkression-preview/" },
+      ],
+      buttons: [{ label: "All press", url: "/press/", style: "ghost" }],
+    },
+
+    // 7. Newsletter + socials
+    {
+      type:    "cta",
+      eyebrow: "Stay in the loop",
+      title:   "Follow the studio",
+      text:    "Release news, events and behind-the-scenes from BROKENCIGS.",
+      buttons: [{ label: "Subscribe", url: "https://mailchi.mp/brokencigs/subscribe" }],
+      socials: true,
+    },
   ],
 };
 </script>

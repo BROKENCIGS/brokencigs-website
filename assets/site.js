@@ -77,11 +77,13 @@
     }
     return (SITE.games || []).map((g) => ({
       id: g.id, url: g.url || `/${g.id}/`, title: g.title, cover: g.cover, label: g.label, year: g.year,
+      badge: g.badge, badgeColor: g.badgeColor,
     }));
   }
   function cardGrid(cards) {
     return `<div class="cards">` + cards.map((c) => `
       <a class="card ${c.big ? "card--big-title" : ""}" ${linkAttrs(c.url)}>
+        ${c.badge ? `<span class="card__badge" ${c.badgeColor ? `style="--badge:${esc(c.badgeColor)}"` : ""}>${esc(c.badge)}</span>` : ""}
         <div class="card__img"><img src="${esc(c.cover)}" alt="" loading="lazy"></div>
         <div class="card__body">
           <h3 class="card__title">${esc(c.title)}</h3>
@@ -105,6 +107,80 @@
         ${buttons(b.buttons, "buttons--center")}
       </section>`;
     },
+
+    // Full-screen spotlight for a featured game (home page).
+    // Change `accent` to recolour the badge, button and glow for another game.
+    promo: (b) => {
+      const vars = [b.accent && `--accent:${b.accent};--btn-bg:${b.accent}`, b.accentInk && `--btn-ink:${b.accentInk}`]
+        .filter(Boolean).join(";");
+      const logo = b.logo ? `<img src="${esc(b.logo)}" alt="${esc(b.title || "")}">` : `<h1 class="page-title">${esc(b.title)}</h1>`;
+      return `
+      <section class="promo full" style="${esc(vars)}">
+        <div class="promo__bg" style="background-image:url('${esc(b.background)}')"></div>
+        <div class="promo__inner">
+          ${b.badge ? `<p class="promo__badge"><span class="promo__dot"></span>${inline(b.badge)}</p>` : ""}
+          ${b.link ? `<a class="promo__logo" ${linkAttrs(b.link)}>${logo}</a>` : `<div class="promo__logo">${logo}</div>`}
+          ${b.text ? `<p class="promo__text">${inline(b.text)}</p>` : ""}
+          ${buttons(b.buttons, "buttons--center")}
+          ${b.meta ? `<ul class="promo__meta">${b.meta.map((m) => `<li>${inline(m)}</li>`).join("")}</ul>` : ""}
+        </div>
+      </section>`;
+    },
+
+    // Scrolling ticker band. color / ink set the band and text colours.
+    marquee: (b) => {
+      const row = (b.items || []).map((i) => `<span>${inline(i)}</span><span class="marquee__sep">✢</span>`).join("");
+      const band = `<div class="marquee__track"><div class="marquee__row">${row}</div><div class="marquee__row" aria-hidden="true">${row}</div></div>`;
+      const vars = [b.color && `--marquee-bg:${b.color}`, b.ink && `--marquee-ink:${b.ink}`].filter(Boolean).join(";");
+      return `
+      <div class="marquee full" style="${esc(vars)}">
+        ${b.link ? `<a class="marquee__band" ${linkAttrs(b.link)}>${band}</a>` : `<div class="marquee__band">${band}</div>`}
+      </div>`;
+    },
+
+    // Text on one side, image on the other (flip: true swaps sides)
+    split: (b) => `
+      <section class="split ${b.flip ? "split--flip" : ""}">
+        <div class="split__text">
+          ${b.eyebrow ? `<p class="eyebrow">${inline(b.eyebrow)}</p>` : ""}
+          ${b.title ? `<h2 class="split__title">${inline(b.title)}</h2>` : ""}
+          <div class="prose">${paras(b.body)}</div>
+          ${buttons(b.buttons)}
+        </div>
+        <div class="split__media">${media(b.image, { lightbox: "split" })}</div>
+      </section>`,
+
+    // A row of names separated by ✢, e.g. events we've shown at
+    chips: (b) => `
+      <section class="chips">
+        ${b.title ? `<p class="eyebrow chips__title">${inline(b.title)}</p>` : ""}
+        <ul>${(b.items || []).map((i) => {
+          const it = typeof i === "string" ? { label: i } : i;
+          return `<li>${it.url ? `<a ${linkAttrs(it.url)}>${esc(it.label)}</a>` : esc(it.label)}</li>`;
+        }).join("")}</ul>
+      </section>`,
+
+    // Press headline cards
+    quotes: (b) => `
+      <section class="quotes">
+        ${title(b.title)}
+        <div class="quotes__grid">${(b.items || []).map((q) => `
+          <a class="quote" ${linkAttrs(q.url)}>
+            <blockquote>“${esc(q.text)}”</blockquote>
+            <p class="quote__src">${esc(q.source)}</p>
+          </a>`).join("")}</div>
+        ${buttons(b.buttons, "buttons--center")}
+      </section>`,
+
+    // Call-to-action panel (newsletter etc). socials: true adds the social icons.
+    cta: (b) => `
+      <section class="cta">
+        ${b.eyebrow ? `<p class="eyebrow">${inline(b.eyebrow)}</p>` : ""}
+        <h2 class="cta__title">${inline(b.title)}</h2>
+        ${b.text ? `<p class="cta__text">${inline(b.text)}</p>` : ""}
+        ${buttons(b.buttons, "buttons--center")}
+        ${b.socials ? socials("socials--cta") : ""}
+      </section>`,
 
     // Big centered image with optional heading above and buttons below
     hero: (b) => `
