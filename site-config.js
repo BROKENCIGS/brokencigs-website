@@ -35,6 +35,13 @@ window.SITE = {
 
   subscribe: { label: "Subscribe", url: "https://mailchi.mp/brokencigs/subscribe" },
 
+  // Highlighted button at the right end of the menu. Delete this line to hide it.
+  // `color` also tints the menu's hover effects, scroll bar and announcement strip.
+  navButton: { label: "Play on Steam", url: "https://store.steampowered.com/app/3553350/The_Hilltop_Funeral/", color: "#dbc816", ink: "#1c1c1c" },
+
+  // Thin strip above the menu on every page. Delete this line to hide it.
+  announcement: { text: "The Hilltop Funeral is out now in Early Access", link: "Learn more", url: "/the-hilltop-funeral/" },
+
   // ── Games ─────────────────────────────────────────────────
   // Shown on /games/, the home page, and "You may also like".
   // Order here = order on the site. `id` must match the page folder name.

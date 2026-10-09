@@ -337,24 +337,51 @@
 
   // ── Page shell ────────────────────────────────────────────
   const here = location.pathname.replace(/index\.html$/, "");
-  const navLinks = (SITE.nav || []).map((n) => {
-    const active = here === n.url || (PAGE.section && n.url.includes(PAGE.section));
-    return `<li><a href="${esc(n.url)}" ${active ? 'aria-current="page"' : ""}>${esc(n.label)}</a></li>`;
-  }).join("");
+  const isActive = (n) => here === n.url || (PAGE.section && n.url.includes(PAGE.section));
+  const navLinks = (SITE.nav || []).map((n) =>
+    `<li ${isActive(n) ? 'class="is-active"' : ""}><a href="${esc(n.url)}" ${isActive(n) ? 'aria-current="page"' : ""}>` +
+    `<span class="roll" data-text="${esc(n.label)}">${esc(n.label)}</span></a></li>`
+  ).join("");
+  const mobileLinks = (SITE.nav || []).map((n, i) =>
+    `<li style="--i:${i}"><a href="${esc(n.url)}" ${isActive(n) ? 'aria-current="page"' : ""}>` +
+    `<small>${String(i + 1).padStart(2, "0")}</small>${esc(n.label)}</a></li>`
+  ).join("");
+
+  const nb = SITE.navButton;
+  const navButton = (cls) => nb
+    ? `<a class="nav-cta ${cls || ""}" ${linkAttrs(nb.url)}>${esc(nb.label)}<span aria-hidden="true">↗</span></a>` : "";
+
+  const ann = SITE.announcement;
+  const announcement = ann ? `
+      <a class="announce" ${linkAttrs(ann.url)}>
+        <span class="announce__dot" aria-hidden="true"></span>${esc(ann.text)}
+        ${ann.link ? `<span class="announce__link">${esc(ann.link)} <span class="announce__arrow">→</span></span>` : ""}
+      </a>` : "";
 
   const header = `
     <header class="site-header">
-      <a class="brand" href="/" aria-label="${esc(SITE.name)} home">
-        ${SITE.logo ? `<img src="${esc(SITE.logo)}" alt="${esc(SITE.name)}">` : `<span>${esc(SITE.name)}</span>`}
-      </a>
-      <nav class="site-nav" id="site-nav">
-        <ul class="site-nav__links">${navLinks}</ul>
-        ${socials("socials--nav")}
-      </nav>
-      <button class="menu-btn" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
-        <span></span><span></span>
-      </button>
-    </header>`;
+      ${announcement}
+      <div class="site-header__bar">
+        <a class="brand" href="/" aria-label="${esc(SITE.name)} home">
+          ${SITE.logo ? `<img src="${esc(SITE.logo)}" alt="${esc(SITE.name)}">` : `<span>${esc(SITE.name)}</span>`}
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <ul class="site-nav__links">${navLinks}</ul>
+          ${navButton()}
+        </nav>
+        <button class="menu-btn" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menu">
+          <span></span><span></span>
+        </button>
+        <div class="site-header__progress" aria-hidden="true"></div>
+      </div>
+    </header>
+    <div class="mobile-menu" id="mobile-menu">
+      <ul class="mobile-menu__links">${mobileLinks}</ul>
+      <div class="mobile-menu__foot">
+        ${navButton("nav-cta--big")}
+        ${socials("socials--menu")}
+      </div>
+    </div>`;
 
   const footer = `
     <footer class="site-footer">
@@ -372,12 +399,15 @@
     </footer>`;
 
   document.body.id = "top";
+  if (ann) document.body.classList.add("has-announce");
   const rootStyle = document.documentElement.style;
   if (PAGE.accent)    rootStyle.setProperty("--accent", PAGE.accent);
   if (PAGE.accentInk) rootStyle.setProperty("--accent-ink", PAGE.accentInk);
   if (PAGE.button)    rootStyle.setProperty("--btn-bg", PAGE.button);
   if (PAGE.buttonInk) rootStyle.setProperty("--btn-ink", PAGE.buttonInk);
   if (PAGE.headingColor) rootStyle.setProperty("--heading", PAGE.headingColor);
+  if (nb && nb.color) rootStyle.setProperty("--nav-accent", nb.color);
+  if (nb && nb.ink)   rootStyle.setProperty("--nav-accent-ink", nb.ink);
 
   // Optional page background art at the top, fading into the page colour
   if (PAGE.background && PAGE.background.image) {
@@ -403,13 +433,28 @@
 
   // ── Mobile menu ───────────────────────────────────────────
   const btn = document.querySelector(".menu-btn");
-  btn.addEventListener("click", () => {
-    const open = document.body.classList.toggle("menu-open");
+  const setMenu = (open) => {
+    document.body.classList.toggle("menu-open", open);
     btn.setAttribute("aria-expanded", open);
-  });
+  };
+  btn.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
+  document.querySelectorAll(".mobile-menu a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
-  // Header gets a background once you scroll
-  const onScroll = () => document.body.classList.toggle("scrolled", window.scrollY > 10);
+  // ── Header on scroll: floating pill, hide on scroll down, progress line ──
+  const bar = document.querySelector(".site-header__progress");
+  let lastY = window.scrollY;
+  const onScroll = () => {
+    const y = window.scrollY;
+    document.body.classList.toggle("scrolled", y > 10);
+    if (!document.body.classList.contains("menu-open")) {
+      if (y > lastY + 4 && y > 240) document.body.classList.add("nav-hidden");
+      else if (y < lastY - 4 || y < 240) document.body.classList.remove("nav-hidden");
+    }
+    lastY = y;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? Math.min(y / max, 1) : 0})`;
+  };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 

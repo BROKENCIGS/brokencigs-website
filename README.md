@@ -201,6 +201,11 @@ Copy one `{ type: "event", ... }` block in that year's `index.html`, paste it at
 ### Add a press article
 Add a line to the top of the "Media" `items` in `press/index.html`. To feature it on the home page too, add it to the `quotes` block in `index.html`.
 
+### Change the menu's button or the announcement strip
+In `site-config.js`:
+- `navButton`: the highlighted button at the right of the menu. Its `color` also tints the menu hover effect, the scroll progress line and the announcement strip.
+- `announcement`: the thin strip above the menu on every page. Delete the line to hide it.
+
 ### Feature a different game on the home page
 Edit the `promo` and `marquee` blocks at the top of `index.html`: swap the logo, background, link, accent colour and text. The card badges ("Early Access · Out now", "Demo on Steam") are the `badge` / `badgeColor` fields in `site-config.js`.
 
