@@ -224,17 +224,18 @@
       }).join("")}</section>`;
     },
 
-    // Numbered feature rows, alternating sides. Each item: { title, text, media: [1 or 2 images/GIFs] }.
-    // With two media the second overlaps the first like a collage.
+    // Numbered feature rows. Each item: { title, text, media: [1 or 2 images/GIFs] }.
+    // One image: text and image side by side, alternating. Two: text on top, both images below.
+    // Click any image to view it full screen.
     features: (b) => {
       const pad = (n) => String(n).padStart(2, "0");
       return `
       <section class="features">
         ${title(b.title)}
         ${(b.items || []).map((f, i) => `
-          <article class="feat ${i % 2 ? "feat--flip" : ""}">
-            <div class="feat__media ${(f.media || []).length > 1 ? "feat__media--duo" : ""}">
-              ${(f.media || []).slice(0, 2).map((m) => media(m)).join("")}
+          <article class="feat ${(f.media || []).length > 1 ? "feat--duo" : i % 2 ? "feat--flip" : ""}">
+            <div class="feat__media">
+              ${(f.media || []).slice(0, 2).map((m) => media(m, { lightbox: "feat-" + i })).join("")}
             </div>
             <div class="feat__text">
               <p class="feat__num">${pad(i + 1)}</p>
