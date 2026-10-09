@@ -94,19 +94,17 @@
   // Each key is a block `type` you can use in a page's PAGE.blocks list.
   const BLOCKS = {
 
-    // Full-width key art banner for game pages, with buttons underneath.
-    // `logo` is optional — only use it if the art doesn't already show the title.
-    "game-hero": (b) => `
-      <section class="game-hero full">
-        <div class="game-hero__art">
-          <img src="${esc(b.background)}" alt="${esc(b.title || "")}">
-          ${b.logo ? `<img class="game-hero__logo" src="${esc(b.logo)}" alt="">` : ""}
-        </div>
-        <div class="game-hero__inner">
-          ${b.subtitle ? `<p class="game-hero__sub">${inline(b.subtitle)}</p>` : ""}
-          ${buttons(b.buttons, "buttons--center")}
-        </div>
-      </section>`,
+    // Game page header: the game's title logo (clickable if `link` is set) + buttons
+    "game-hero": (b) => {
+      const logo = `<img src="${esc(b.logo)}" alt="${esc(b.title || "")}">`;
+      return `
+      <section class="game-hero">
+        ${b.link ? `<a class="game-hero__title-logo" ${linkAttrs(b.link)}>${logo}</a>`
+                 : `<div class="game-hero__title-logo">${logo}</div>`}
+        ${b.subtitle ? `<p class="game-hero__sub">${inline(b.subtitle)}</p>` : ""}
+        ${buttons(b.buttons, "buttons--center")}
+      </section>`;
+    },
 
     // Big centered image with optional heading above and buttons below
     hero: (b) => `

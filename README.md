@@ -88,7 +88,7 @@ Inside a `"..."` string, write `\"` for a double quote, or just use curly quotes
 // Big centered lines (mottos, game taglines)
 { type: "tagline", lines: ["Creating what we believe.", "Believing in what we make."] }
 
-// Buttons (style: "ghost" = outlined; align: "left" or centered by default)
+// Buttons (centered; style: "ghost" = outlined; add align: "left" to left-align)
 { type: "buttons", items: [
     { label: "Play on Steam", url: "https://..." },
     { label: "Press Kit",     url: "https://...", style: "ghost" },
@@ -97,9 +97,9 @@ Inside a `"..."` string, write `\"` for a double quote, or just use curly quotes
 // Home-page style hero: heading, big image (clickable if link is set), buttons
 { type: "hero", title: "Available now!", image: "/images/...", link: "/the-hilltop-funeral/", buttons: [ ... ] }
 
-// Game page banner: full-width key art + buttons
-{ type: "game-hero", title: "Game Name", background: "/images/covers/game.png",
-  logo: "/images/game/logo.png",   // optional: only if the art doesn't already show the title
+// Game page header: the game's title logo (transparent PNG) + buttons
+{ type: "game-hero", title: "Game Name", logo: "/images/game/logo.png",
+  link: "https://store.steampowered.com/...",   // optional: makes the logo clickable
   buttons: [ ... ] }
 
 // YouTube video — the id is the part after "watch?v=" (start = seconds, optional)
