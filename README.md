@@ -249,7 +249,7 @@ Edit the `:root { ... }` block at the top of `assets/site.css`. Fonts come from 
 
 Same setup as your personal portfolio (lilyinthelu.com):
 
-1. Create a new GitHub repo (e.g. `brokencigs-website`) and push this folder to it.
+1. The repo is https://github.com/BROKENCIGS/brokencigs-website (it must be **public** for free GitHub Pages).
 2. Repo → **Settings → Pages** → Source: *Deploy from a branch* → `main` / `(root)`.
 3. The `CNAME` file already says `brokencigs.com`. In Settings → Pages, confirm the custom domain shows `brokencigs.com`.
 4. At your domain registrar, replace the Adobe Portfolio DNS records with:
@@ -260,7 +260,7 @@ Same setup as your personal portfolio (lilyinthelu.com):
    | A | @ | 185.199.109.153 |
    | A | @ | 185.199.110.153 |
    | A | @ | 185.199.111.153 |
-   | CNAME | www | `<your-github-username>.github.io` |
+   | CNAME | www | `brokencigs.github.io` |
 
 5. Wait for DNS to update (minutes to a few hours), then tick **Enforce HTTPS** in Settings → Pages.
 6. Remove the custom domain from Adobe Portfolio so the two don't fight over it.
